@@ -1,5 +1,5 @@
-trigger:
-  - none
+jobs:
+  -job: mavencompilacion
 pool:
   vmImage: ubuntu-latest
 steps:
