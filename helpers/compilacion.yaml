@@ -3,8 +3,7 @@ jobs:
     pool:
       vmImage: ubuntu-latest
     steps:
-      - checkout: templates  
-      - checkout: data-pipeline
+      - checkout: templates 
       - task: UseDotNet@2
         inputs:
           version: 3.x
