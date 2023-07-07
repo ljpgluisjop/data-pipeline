@@ -1,4 +1,4 @@
 stages:
 - stage: Compilacion
   displayName: Se compila
-- template: pipelines/compilacion.yaml
+- template: compilacion.yaml
