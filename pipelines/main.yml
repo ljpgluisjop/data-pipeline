@@ -10,7 +10,7 @@ stages:
         inputs:
             script: |
                 echo "hola esto es una prueba"
-- stage:
+- stage: Compilacion
   dependsOn: prueba
   jobs:
   - job: mavencompilacion
