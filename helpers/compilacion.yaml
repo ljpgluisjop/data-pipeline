@@ -13,6 +13,7 @@ jobs:
         displayName: Git fetch
         inputs:
           script: |
+            ls -la
             git fetch 
       - task: gitversion/setup@0
         displayName: Setup git version
