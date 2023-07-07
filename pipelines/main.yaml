@@ -2,4 +2,4 @@ stages:
 - stage: Compilacion
   displayName: Se compila
   jobs:
-  - template: compilacion.yaml
+  - template: ../helpers/compilacion.yaml
