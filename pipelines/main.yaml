@@ -3,3 +3,10 @@ stages:
   displayName: Se compila
   jobs:
   - template: ../helpers/compilacion.yaml
+- stage: Mensaje
+  jobs:
+  - job: mensaje
+    pool:
+      vmImage: ubuntu-latest
+    steps:
+      scrip: echo "hola solo para prueba"
