@@ -5,7 +5,6 @@ jobs:
       steps:
       - checkout: templates  
       - checkout: data-pipeline
-      steps:
         - task: UseDotNet@2
           inputs:
             version: 3.x
