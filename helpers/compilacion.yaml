@@ -1,5 +1,5 @@
 jobs:
-  - job: mavencompilacion
+  - job: otracosa
     pool:
       vmImage: ubuntu-latest
       steps:
