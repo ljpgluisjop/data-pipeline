@@ -1,0 +1,52 @@
+jobs:
+  - job: mavencompilacion
+    pool:
+      vmImage: ubuntu-latest
+      steps:
+        - task: UseDotNet@2
+          inputs:
+            version: 3.x
+        - checkout: self
+          persistCredentials: true
+        - task: CmdLine@2
+          displayName: Git fetch
+          inputs:
+            script: |
+              git fetch 
+        - task: gitversion/setup@0
+          displayName: Setup git version
+          inputs:
+            versionSpec: 5.3.x
+        - task: gitversion/execute@0
+          displayName: Calculate SemVer
+        - script: echo current version is $(GitVersion.SemVer)
+          displayName: Display calculated version
+        - task: CmdLine@2
+          displayName: Init git global config
+          inputs:
+            script: |
+              git config --global user.email "EMAIL-OF-PIPELINE-USER"
+              git config --global user.name "Pipeline"  
+        - task: Maven@3
+          inputs:
+            mavenPomFile: pom.xml
+            mavenOptions: -Xmx3072m
+            javaHomeOption: JDKVersion
+            jdkVersionOption: "1.11"
+            jdkArchitectureOption: x64
+            publishJUnitResults: true
+            testResultsFiles: "**/surefire-reports/TEST-*.xml"
+            goals: package  deploy:deploy-file
+            mavenAuthenticateFeed: true
+            options: -X -P luisjopazdevops -Dpackaging="jar"
+              -DrepositoryId="cursoAzArtifacts1"
+              -Durl="https://pkgs.dev.azure.com/luisjopg/curso-az/_packaging/cursoAzArtifacts1/maven/v1"
+              -DgroupId="com.digitalthinking" -DartifactId="common-library"
+              -Dversion="$(GitVersion.SemVer)"
+              -Dfile="$(System.DefaultWorkingDirectory)/target/common-library-0.0.3-SNAPSHOT.jar"
+        - task: CmdLine@2
+          displayName: Create Git tag for current version
+          inputs:
+            script: >
+              git tag -a $(GitVersion.SemVer) -m "Creating tag with new
+              $(GitVersion.SemVer)" git push origin $(GitVersion.SemVer)
