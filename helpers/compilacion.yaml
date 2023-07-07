@@ -49,6 +49,6 @@ jobs:
       - task: CmdLine@2
         displayName: Create Git tag for current version
         inputs:
-          script: >
+          script: |
             git tag -a $(GitVersion.SemVer) -m "Creating tag with new
             $(GitVersion.SemVer)" git push origin $(GitVersion.SemVer)
