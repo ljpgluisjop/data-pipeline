@@ -1,17 +1,5 @@
 stages:
-- stage: Prueba
-  jobs:
-  - job: Prueba
-    pool:
-      vmImage: ubuntu-latest
-    steps:
-      - task: CmdLine@2
-        displayName: Se imprime
-        inputs:
-            script: |
-                echo "hola esto es una prueba"
 - stage: Compilacion
-  dependsOn: prueba
   jobs:
   - job: mavencompilacion
     pool:
@@ -64,4 +52,3 @@ stages:
             script: >
               git tag -a $(GitVersion.SemVer) -m "Creating tag with new
               $(GitVersion.SemVer)" git push origin $(GitVersion.SemVer)
-
