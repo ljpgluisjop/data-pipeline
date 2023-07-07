@@ -22,12 +22,15 @@ jobs:
           versionSpec: 5.3.x
       - task: gitversion/execute@0
         displayName: Calculate SemVer
-      - script: echo current version is $(GitVersion.SemVer)
+      - script: |
+          cd azdevops-prue
+          echo current version is $(GitVersion.SemVer)
         displayName: Display calculated version
       - task: CmdLine@2
         displayName: Init git global config
         inputs:
           script: |
+            cd azdevops-prue
             git config --global user.email "EMAIL-OF-PIPELINE-USER"
             git config --global user.name "Pipeline"  
       - task: Maven@3
@@ -51,5 +54,6 @@ jobs:
         displayName: Create Git tag for current version
         inputs:
           script: |
+            cd azdevops-prue
             git tag -a $(GitVersion.SemVer) -m "Creating tag with new
             $(GitVersion.SemVer)" git push origin $(GitVersion.SemVer)
