@@ -22,9 +22,7 @@ jobs:
           versionSpec: 5.3.x
       - task: gitversion/execute@0
         displayName: Calculate SemVer
-      - script: |
-          cd azdevops-prue
-          echo current version is $(GitVersion.SemVer)
+      - script: cd azdevops-prue; echo current version is $(GitVersion.SemVer)
         displayName: Display calculated version
       - task: CmdLine@2
         displayName: Init git global config
