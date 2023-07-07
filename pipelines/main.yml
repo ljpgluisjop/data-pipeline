@@ -6,7 +6,7 @@ stages:
       vmImage: ubuntu-latest
     steps:
       - task: CmdLine@2
-        displayName: Init git global config
+        displayName: Se imprime
         inputs:
             script: |
                 echo "hola esto es una prueba"
