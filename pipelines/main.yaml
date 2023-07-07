@@ -10,5 +10,11 @@ stages:
   dependsOn: Mensaje
   displayName: Se compila
   jobs:
-  - template: ../helpers/compilacion.yaml
+    ${{ if contains(variables['Build.SourceVersionMenssage'], 'compila') }}:
+    - template: ../helpers/compilacion.yaml
+    ${{ else }}
+      jobs:
+        steps:
+          - script:  echo "no hay nada que compilar"
+    
 
