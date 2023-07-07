@@ -1,8 +1,4 @@
 stages:
-- stage: Compilacion
-  displayName: Se compila
-  jobs:
-  - template: ../helpers/compilacion.yaml
 - stage: Mensaje
   jobs:
   - job: mensaje
@@ -10,3 +6,9 @@ stages:
       vmImage: ubuntu-latest
     steps:
       - script:  echo "hola solo para prueba"
+- stage: Compilacion
+  dependsOn: Mensaje
+  displayName: Se compila
+  jobs:
+  - template: ../helpers/compilacion.yaml
+
