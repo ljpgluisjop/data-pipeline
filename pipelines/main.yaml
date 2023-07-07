@@ -9,4 +9,5 @@ stages:
     pool:
       vmImage: ubuntu-latest
     steps:
-      script: echo "hola solo para prueba"
+      script: |
+          echo "hola solo para prueba"
